@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+    <script src="./js/matter.js"></script>
+    <script>
+        let engine = Matter.Engine.create();
+        let world = engine.world;
+        let render = Matter.Render.create({
+            engine: engine,
+            element: document.body,
+        });
+
+        Matter.Engine.run(engine);
+        Matter.Render.run(render);
+
+        let ground = Matter.Bodies.rectangle(400, 600, 600, 100, { isStatic:true });
+        Matter.World.add(world, ground);
+
+        let x = 110;
+        setInterval(() => {
+            console.log(x);
+            let box = Matter.Bodies.rectangle(x, 0, 40, 40);
+            Matter.World.add(world, box);
+            x += 1;
+        }, 400);
+
+        console.log(engine);
+        console.log(world);
+        console.log(render);
+    </script>
+</body>
+</html>
